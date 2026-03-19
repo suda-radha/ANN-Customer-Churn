@@ -20,7 +20,7 @@ if keras.__version__.startswith('2'):
 # -----------------------------------------
 
 # load the trained model
-model = tf.keras.models.load_model('model_saved.keras', compile=False)
+model = tf.keras.models.load_model('model_saved.keras')
 
 ## load the encoders and scalar
 with open('onehot_encoder_geo.pkl', 'rb') as file:

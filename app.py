@@ -5,6 +5,20 @@ import tensorflow as tf
 import pickle
 from sklearn.preprocessing import  LabelEncoder, OneHotEncoder, StandardScaler
 
+# This ensures that if the environment uses an older Keras, 
+# it can still interpret the 'batch_shape' key from your saved model.
+import keras
+if keras.__version__.startswith('2'):
+    from keras.layers import InputLayer
+    def patched_init(self, *args, **kwargs):
+        kwargs.pop('batch_shape', None)
+        kwargs.pop('optional', None)
+        self.__init_orig__(*args, **kwargs)
+    if not hasattr(InputLayer, '__init_orig__'):
+        InputLayer.__init_orig__ = InputLayer.__init__
+        InputLayer.__init__ = patched_init
+# -----------------------------------------
+
 # load the trained model
 model = tf.keras.models.load_model('model_saved.keras', compile=False)
 

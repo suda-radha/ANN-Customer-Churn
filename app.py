@@ -6,7 +6,7 @@ import pickle
 from sklearn.preprocessing import  LabelEncoder, OneHotEncoder, StandardScaler
 
 # load the trained model
-model = tf.keras.models.load_model('model.h5')
+model = tf.keras.models.load_model('model_saved.keras', compile=False)
 
 ## load the encoders and scalar
 with open('onehot_encoder_geo.pkl', 'rb') as file:
